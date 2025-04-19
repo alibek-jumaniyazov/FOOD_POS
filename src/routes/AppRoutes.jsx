@@ -1,6 +1,6 @@
 import Login from "../pages/auth/Login";
 import Calculation from "../pages/calculation/Calculation";
-import Dashboard from "../pages/dashboard/Dashboard";
+import Home from "../pages/home/Home";
 
 export const AppRoute = {
   public: [
@@ -15,7 +15,7 @@ export const AppRoute = {
     {
       id: 1,
       path: "/",
-      element: <Dashboard />,
+      element: <Home />,
       fallback: <h1>Loading...</h1>,
     },
     {
