@@ -11,3 +11,21 @@
 body {
   background-color: #252836;
 }
+.threeBlock .ant-select-selector{
+  background: #1F1D2B!important;
+  color: white!important;
+  border: 1px solid #393C49!important;
+  border-radius: 8px!important;
+}
+
+:where(.css-dev-only-do-not-override-1261szd)[class^="ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1261szd)[class*=" ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1261szd)[class^="ant-select"] [class*=" ant-select"], :where(.css-dev-only-do-not-override-1261szd)[class*=" ant-select"] [class*=" ant-select"], :where(.css-dev-only-do-not-override-1261szd)[class^="ant-select"] [class^="ant-select"]::after, :where(.css-dev-only-do-not-override-1261szd)[class*=" ant-select"] [class^="ant-select"]::after, :where(.css-dev-only-do-not-override-1261szd)[class^="ant-select"] [class*=" ant-select"]::after, :where(.css-dev-only-do-not-override-1261szd)[class*=" ant-select"] [class*=" ant-select"]::after {
+  background: #1F1D2B!important;
+  color: white!important;
+  border-radius: 8px!important;
+  
+}
+:where(.css-dev-only-do-not-override-1261szd){
+  background: #1F1D2B!important;
+  color: white!important;
+  border-radius: 8px!important;
+}

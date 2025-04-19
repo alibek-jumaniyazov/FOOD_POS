@@ -40,7 +40,7 @@ function App() {
         {/*Agar page bo'lmasa */}
         <Route
           path="*"
-          element={<Navigate to={isAuthenticated ? "/" : "/login"} replace />}
+          element={<Navigate to={isAuthenticated ? "/order" : "/login"} replace />}
         />
       </Routes>
     </>

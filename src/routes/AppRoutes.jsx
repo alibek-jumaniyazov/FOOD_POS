@@ -1,6 +1,8 @@
 import Login from "../pages/auth/Login";
 import Calculation from "../pages/calculation/Calculation";
+import Dashboard from "../pages/dashboard/Dashboard";
 import Home from "../pages/home/Home";
+import Settings from "../pages/settings/Settings";
 
 export const AppRoute = {
   public: [
@@ -14,14 +16,26 @@ export const AppRoute = {
   private: [
     {
       id: 1,
-      path: "/",
+      path: "/order/*",
       element: <Home />,
       fallback: <h1>Loading...</h1>,
     },
     {
-      id: 1,
+      id: 2,
       path: "/calculation",
       element: <Calculation />,
+      fallback: <h1>Loading...</h1>,
+    },
+    {
+      id: 3,
+      path: "/dashboard",
+      element: <Dashboard />,
+      fallback: <h1>Loading...</h1>,
+    },
+    {
+      id: 4,
+      path: "/settings",
+      element: <Settings />,
       fallback: <h1>Loading...</h1>,
     },
   ],
