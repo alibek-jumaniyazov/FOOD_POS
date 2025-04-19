@@ -6,7 +6,7 @@ export default {
       colors: {
         baseColor: "#F4F4F4",
         boldColor: "#1F1D2B",
-        lightColor: "#EDEDED",
+        lightDark: "#EDEDED",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
