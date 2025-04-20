@@ -29,3 +29,9 @@ body {
   color: white!important;
   border-radius: 8px!important;
 }
+.deleteIcon:hover svg path {
+  fill: #FF7CA3 !important;
+}
+.deleteIcon svg path {
+  fill: #EA7C69 !important;
+}
