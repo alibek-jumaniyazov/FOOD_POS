@@ -8,16 +8,16 @@ const Sidebar = () => {
   const location = useLocation();
   const [petternWidth, setPatternWidth] = useState(8);
 
-  useEffect(() => {
-    const path = location.pathname;
+  // useEffect(() => {
+  //   const path = location.pathname;
 
-    if (path === "/order") setPatternWidth(8);
-    else if (path === "/calculation") setPatternWidth(15.4);
-    else if (path === "/dashboard") setPatternWidth(23);
-    else if (path === "/messages") setPatternWidth(0);
-    else if (path === "/notification") setPatternWidth(0);
-    else if (path === "/settings") setPatternWidth(45.7);
-  }, [location.pathname]);
+  //   if (path === "/order") setPatternWidth(8);
+  //   else if (path === "/calculation") setPatternWidth(15.4);
+  //   else if (path === "/dashboard") setPatternWidth(23);
+  //   else if (path === "/messages") setPatternWidth(0);
+  //   else if (path === "/notification") setPatternWidth(0);
+  //   else if (path === "/settings") setPatternWidth(45.7);
+  // }, [location.pathname]);
 
   function handleLogout() {
     localStorage.removeItem("isAuthenticated");
@@ -32,15 +32,14 @@ const Sidebar = () => {
             <Icons.logo className="w-10 h-10" />
           </div>
         </NavLink>
-        <img
+        {/* <img
           src={pettern}
           alt=""
           className={`absolute  top-[${petternWidth}vw] right-[-0.5px] z-10`}
-        />
+        /> */}
         <div className="flex flex-col gap-11 mt-4 z-20">
           {sidebarItems.map((item) => (
             <NavLink
-              onClick={() => handleResize(item.id)}
               key={item.id}
               to={item.path}
               className={({ isActive }) =>

@@ -6,14 +6,15 @@ import HotDishes from "../menu/HotDishes";
 import ColdDishes from "../menu/ColdDishes";
 import { OrderRoute } from "../../routes/OrderRoutes";
 import { Select } from "antd";
+import ProductCard from "../../components/menu/ProductCard";
 
 export default function Home() {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
   return (
-    <div className="Home flex justify-start items-start w-full h-full ">
-      <div className="flex flex-col gap-10 !p-6 w-full">
+    <div className="Home flex justify-between items-start w-full h-full ">
+      <div className="flex flex-col gap-10 !p-6 w-[80%]">
         <div className="oneBlock flex justify-between items-center">
           <div>
             <h1 className="text-[28px] font-[600]">Jaegar Resto</h1>
@@ -51,7 +52,7 @@ export default function Home() {
             <span className="absolute left-0 bottom-[0.5px] bg-[#393c49] rounded-[1px] w-full h-[1px] z-10"></span>
           </div>
         </div>
-        <div className="threeBlock flex flex-col gap-28 w-full">
+        <div className="threeBlock flex flex-col gap-15 w-full">
           <div className="w-full flex justify-between items-center">
             <h1 className="text-[20px] font-[600] text-white">Choose Dishes</h1>
             <Select
@@ -78,7 +79,7 @@ export default function Home() {
           </Routes>
         </div>
       </div>
-      <div className="w-[50%] h-screen bg-[#1F1D2B] rounded-tl-2xl rounded-bl-2xl"></div>
+      <ProductCard />
     </div>
   );
 }

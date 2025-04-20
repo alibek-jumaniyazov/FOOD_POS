@@ -1,15 +1,21 @@
-import React from 'react'
-import MenuImg from "../../assets/images/MenuImg.png"
+import React from 'react';
+import MenuImg from "../../assets/images/MenuImg.png";
+import Product from '../../components/menu/Product';
 
 export default function HotDishes() {
+  const orders = Array.from({ length: 10 }, (_, i) => ({
+    id: i + 1,
+    title: "Spicy seasoned seafood noodles",
+    price: "$ 2.29",
+    availability: "20 Bowls available",
+    image: MenuImg,
+  }));
+
   return (
-    <div className='HotDishes flex flex-col flex-wrap justify-center items-start gap-7'>
-        <div className="cursor-pointer flex flex-col justify-center items-center gap-4 !p-6 w-[192px] h-[226px] bg-[#1F1D2B] rounded-[16px]">
-            <img src={MenuImg} alt="" className='w-[132px] h-[132px] !mt-[-100px]'/>
-            <h4 className='text-center text-[14px] font-[500] text-white'>Spicy seasoned seafood noodles</h4>
-            <p className='text-center text-[14px] font-[400] text-white'>$ 2.29</p>
-            <span className='text-center text-[14px] font-[400] text-[#abbbc2]'>20 Bowls available</span>
-        </div>
+    <div className='HotDishes flex flex-wrap gap-y-[90px] gap-x-7 justify-start items-start h-[620px] overflow-y-auto overflow-x-hidden !pt-[70px]'>
+      {orders.map((order) => (
+        <Product key={order.id} order={order} />
+      ))}
     </div>
-  )
+  );
 }
