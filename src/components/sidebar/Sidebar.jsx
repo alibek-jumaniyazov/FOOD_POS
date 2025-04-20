@@ -25,7 +25,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="h-screen relative w-[104px] bg-[#1F1D2B] !p-6 flex flex-col justify-between items-center rounded-tr-2xl rounded-br-2xl ">
+    <div className="!h-screen relative w-[104px] bg-[#1F1D2B] !p-6 flex flex-col justify-between items-center rounded-tr-2xl rounded-br-2xl ">
       <div className="flex flex-col items-center gap-10">
         <NavLink to="/">
           <div className="bg-[#543c3c] !p-3 rounded-lg">
