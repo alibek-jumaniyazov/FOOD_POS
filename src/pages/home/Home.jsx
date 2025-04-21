@@ -1,17 +1,17 @@
 import React, { Suspense } from "react";
 import { Icons } from "../../assets/Icons";
 import { categoryMenu } from "../../constants/home/category";
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-import HotDishes from "../menu/HotDishes";
-import ColdDishes from "../menu/ColdDishes";
+import { NavLink, Route, Routes } from "react-router-dom";
 import { OrderRoute } from "../../routes/OrderRoutes";
 import { Select } from "antd";
 import ProductCard from "../../components/menu/ProductCard";
 
 export default function Home() {
+
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
+
   return (
     <div className="Home flex justify-between items-start w-full h-full ">
       <div className="flex flex-col gap-10 !p-6 w-[80%]">

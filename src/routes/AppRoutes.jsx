@@ -34,7 +34,7 @@ export const AppRoute = {
     },
     {
       id: 4,
-      path: "/settings",
+      path: "/settings/*",
       element: <Settings />,
       fallback: <h1>Loading...</h1>,
     },

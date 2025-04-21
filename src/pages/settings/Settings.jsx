@@ -1,4 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import SettingsCategory from "../../components/settings/SettingsCategory";
+import { settingsCategory } from "../../constants/settings/settingsCategory";
 
 export default function Settings() {
   return (
@@ -7,7 +10,21 @@ export default function Settings() {
         Settings
       </h1>
       <div className="w-full h-full flex justify-between items-start gap-6">
-        <div className="w-[30%] h-full bg-[#1F1D2B] rounded-lg"></div>
+        <div className="w-[30%] h-full bg-[#1F1D2B] rounded-lg">
+          {settingsCategory.map((item) => (
+            <NavLink
+              key={item.id}
+              to={`/settings/${item.path}`}
+              className={({ isActive }) =>
+                `SettingCategoryLink flex justify-start items-center gap-4 p-4 text-white font-[500] text-[16px] transition duration-300 ${
+                  isActive ? "bg-[#EA7C6942] SettingCategoryLink:!text-[#ea7c69]" : ""
+                }`
+              }
+            >
+              <SettingsCategory item={item}/>
+            </NavLink>
+          ))}
+        </div>
         <div className="w-[70%] h-full bg-[#1F1D2B] rounded-lg"></div>
       </div>
     </div>
