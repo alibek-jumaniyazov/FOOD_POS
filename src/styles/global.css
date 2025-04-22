@@ -62,3 +62,17 @@ body {
 .SettingCategoryLink:hover p {
   color: #ea7c69 !important;
 }
+.editBtn svg path {
+  transition: all 0.3s ease;
+}
+.editBtn:hover svg path {
+  transition: all 0.3s ease;
+  fill: white !important;
+}
+.ProductPost{
+  color: #EA7C69!important;
+  stroke: #EA7C69!important;
+}
+.ProductPost:hover{
+  background-color: #EA7C6942!important;
+}
