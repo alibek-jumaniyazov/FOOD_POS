@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuImg from "../../assets/images/MenuImg.png";
-import Product from '../../components/menu/Product';
+import Product from '../../components/home/menu/Product';
 
 export default function HotDishes() {
   const orders = Array.from({ length: 6 }, (_, i) => ({

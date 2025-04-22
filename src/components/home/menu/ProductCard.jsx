@@ -1,4 +1,4 @@
-import OrderProduct from "../../assets/images/MenuImg.png";
+import OrderProduct from "../../../assets/images/MenuImg.png";
 import ProductCardOrder from "./ProductCardOrder";
 
 export default function ProductCard() {

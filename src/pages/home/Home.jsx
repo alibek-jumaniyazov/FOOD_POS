@@ -4,7 +4,7 @@ import { categoryMenu } from "../../constants/home/category";
 import { NavLink, Route, Routes } from "react-router-dom";
 import { OrderRoute } from "../../routes/OrderRoutes";
 import { Select } from "antd";
-import ProductCard from "../../components/menu/ProductCard";
+import ProductCard from "../../components/home/menu/ProductCard";
 
 export default function Home() {
 

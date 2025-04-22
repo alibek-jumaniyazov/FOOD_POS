@@ -1,7 +1,8 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { Suspense } from "react";
+import { NavLink, Route, Routes } from "react-router-dom";
 import SettingsCategory from "../../components/settings/SettingsCategory";
 import { settingsCategory } from "../../constants/settings/settingsCategory";
+import { SettingsRoute } from "../../routes/SettingsRoutes";
 
 export default function Settings() {
   return (
@@ -17,15 +18,28 @@ export default function Settings() {
               to={`/settings/${item.path}`}
               className={({ isActive }) =>
                 `SettingCategoryLink flex justify-start items-center gap-4 p-4 text-white font-[500] text-[16px] transition duration-300 ${
-                  isActive ? "bg-[#EA7C6942] SettingCategoryLink:!text-[#ea7c69]" : ""
+                  isActive
+                    ? "bg-[#EA7C6942] SettingCategoryLink:!text-[#ea7c69]"
+                    : ""
                 }`
               }
             >
-              <SettingsCategory item={item}/>
+              <SettingsCategory item={item} />
             </NavLink>
           ))}
         </div>
-        <div className="w-[70%] h-full bg-[#1F1D2B] rounded-lg"></div>
+        <div className="w-[70%] h-full bg-[#1F1D2B] rounded-lg">
+          <Routes>
+            {SettingsRoute.map(({ id, path, element, fallback }) => (
+              <Route
+                index
+                key={id}
+                path={path}
+                element={<Suspense fallback={fallback}>{element}</Suspense>}
+              />
+            ))}
+          </Routes>
+        </div>
       </div>
     </div>
   );

@@ -57,7 +57,7 @@ body {
 }
 .SettingCategoryLink:hover {
   transition: all 0.5s ease;
-  background-color: #EA7C6942 !important;
+  background-color: #ea7c6942 !important;
 }
 .SettingCategoryLink:hover p {
   color: #ea7c69 !important;
