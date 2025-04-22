@@ -17,14 +17,16 @@ export default function Settings() {
               key={item.id}
               to={`/settings/${item.path}`}
               className={({ isActive }) =>
-                `SettingCategoryLink flex justify-start items-center gap-4 p-4 text-white font-[500] text-[16px] transition duration-300 ${
+                `SettingCategoryLink flex justify-start items-center gap-4 p-4  font-[500] text-[16px] transition duration-300  ${
                   isActive
-                    ? "bg-[#EA7C6942] SettingCategoryLink:!text-[#ea7c69]"
+                    ? "bg-[#EA7C6942] !text-[#ea7c69] SettingCategoryLink-svg-path:!fill-[#ea7c69] "
                     : ""
                 }`
               }
             >
-              <SettingsCategory item={item} />
+              {({ isActive }) => (
+                <SettingsCategory item={item} isActive={isActive} />
+              )}
             </NavLink>
           ))}
         </div>
