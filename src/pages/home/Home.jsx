@@ -1,16 +1,19 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Icons } from "../../assets/Icons";
 import { categoryMenu } from "../../constants/home/category";
 import { NavLink, Route, Routes } from "react-router-dom";
 import { OrderRoute } from "../../routes/OrderRoutes";
 import { Select } from "antd";
 import ProductCard from "../../components/home/menu/ProductCard";
+import ProductsPayment from "../../components/home/payment/ProductsPayment";
+import ProductCardPayment from "../../components/home/menu/ProductCardPayment";
 
 export default function Home() {
-
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
+  const [productsPayment, setProductsPayment] = useState(false);
+  const [bgBlack, setbgBlack] = useState(false);
 
   return (
     <div className="Home flex justify-between items-start w-full h-full ">
@@ -31,7 +34,6 @@ export default function Home() {
             />
           </div>
         </div>
-
         <div className="twoBlock">
           <div className="relative flex w-full gap-8 justify-start items-center">
             {categoryMenu.map((item) => (
@@ -79,7 +81,36 @@ export default function Home() {
           </Routes>
         </div>
       </div>
-      <ProductCard />
+      <div
+        className={
+          bgBlack
+            ? `absolute bg-[#000000B2] w-full h-full z-40 left-0 top-0`
+            : `!hidden`
+        }
+      ></div>
+      <div
+        className={
+          productsPayment
+            ? "absolute right-0 top-0 z-50 flex justify-end items-center gap-0 w-full"
+            : ` hidden`
+        }
+      >
+        <ProductCardPayment
+          setProductsPayment={setProductsPayment}
+          setbgBlack={setbgBlack}
+        />
+        {productsPayment ? (
+          <ProductsPayment
+            setProductsPayment={setProductsPayment}
+            setbgBlack={setbgBlack}
+          />
+        ) : null}
+      </div>
+      <ProductCard
+        productsPayment={productsPayment}
+        setProductsPayment={setProductsPayment}
+        setbgBlack={setbgBlack}
+      />
     </div>
   );
 }

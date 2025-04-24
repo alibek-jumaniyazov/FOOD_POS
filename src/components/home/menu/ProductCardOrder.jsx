@@ -1,6 +1,6 @@
 import { Input } from "antd";
 import React, { useState } from "react";
-import { Icons } from "../../../assets/Icons";
+import { Icons } from "../../../assets/icons";
 
 export default function ProductCardOrder({ order }) {
   const [productCount, setProductCount] = useState(1);
