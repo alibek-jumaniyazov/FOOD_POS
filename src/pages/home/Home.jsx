@@ -1,5 +1,4 @@
 import React, { Suspense, useState } from "react";
-import { Icons } from "../../assets/Icons";
 import { categoryMenu } from "../../constants/home/category";
 import { NavLink, Route, Routes } from "react-router-dom";
 import { OrderRoute } from "../../routes/OrderRoutes";
@@ -7,6 +6,7 @@ import { Select } from "antd";
 import ProductCard from "../../components/home/menu/ProductCard";
 import ProductsPayment from "../../components/home/payment/ProductsPayment";
 import ProductCardPayment from "../../components/home/menu/ProductCardPayment";
+import { Icons } from "../../assets/icons";
 
 export default function Home() {
   const handleChange = (value) => {
