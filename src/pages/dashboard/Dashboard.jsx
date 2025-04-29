@@ -3,6 +3,8 @@ import { Icons } from "../../assets/icons";
 import { Select } from "antd";
 import MenuImg from "../../assets/images/MenuImg.png";
 import { useState } from "react";
+import PersonOrder from "../../assets/images/PersonOrder.png";
+import Chart from "../../components/dashboard/Chart";
 export default function Dashboard() {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
@@ -20,32 +22,56 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex justify-between items-center w-full gap-6">
-          <div className="w-[230px] h-[143px] bg-[#1F1D2B] !p-4 rounded-lg">
-            <div className="">
-              <div className=""></div>
-              <span>+32.40%</span>
-              <div className=""></div>
+          <div className="flex flex-col justify-between items-start w-[230px] h-[143px] bg-[#1F1D2B] !p-4 rounded-lg">
+            <div className="w-full flex justify-start items-center gap-3">
+              <div className="w-[38px] h-[38px] bg-[#252836] !p-2 rounded-lg flex justify-center items-center">
+                <Icons.coin />
+              </div>
+              <span className="text-[#50D1AA] text-[12px] font-[500]">
+                +32.40%
+              </span>
+              <div className="w-[18px] h-[18px] bg-[#88E0913D] !p-[1px] rounded-full flex justify-center items-center">
+                <Icons.TopArroww />
+              </div>
             </div>
-            <h1>$10,243.00</h1>
-            <p>Total Revenue</p>
+            <h1 className="text-white text-[28px] font-[600]">$10,243.00</h1>
+            <p className="text-[#ABBBC2] text-[14px] font-[500]">
+              Total Revenue
+            </p>
           </div>
-          <div className="w-[230px] h-[143px] bg-[#1F1D2B] !p-4 rounded-lg">
-            <div className="">
-              <div className=""></div>
-              <span>-12.40%</span>
-              <div className=""></div>
+          <div className="flex flex-col justify-between items-start w-[230px] h-[143px] bg-[#1F1D2B] !p-4 rounded-lg">
+            <div className="w-full flex justify-start items-center gap-3">
+              <div className="w-[38px] h-[38px] bg-[#252836] !p-2 rounded-lg flex justify-center items-center">
+                <Icons.SavedOrder />
+              </div>
+              <span className="text-[#FF7CA3] text-[12px] font-[500]">
+                -12.40%
+              </span>
+              <div className="w-[18px] h-[18px] bg-[#FF64713D] !p-[1px] rounded-full flex justify-center items-center">
+                <Icons.BottomArroww />
+              </div>
             </div>
-            <h1>23,456</h1>
-            <p>Total Revenue</p>
+            <h1 className="text-white text-[28px] font-[600]">23,456</h1>
+            <p className="text-[#ABBBC2] text-[14px] font-[500]">
+              Total Revenue
+            </p>
           </div>
-          <div className="w-[230px] h-[143px] bg-[#1F1D2B] !p-4 rounded-lg">
-            <div className="">
-              <div className=""></div>
-              <span>+2.40%</span>
-              <div className=""></div>
+          <div className="flex flex-col justify-between items-start w-[230px] h-[143px] bg-[#1F1D2B] !p-4 rounded-lg">
+            <div className="w-full flex justify-start items-center gap-3">
+              <div className="w-[38px] h-[38px] bg-[#252836] !p-2 rounded-lg flex justify-center items-center">
+                <Icons.customers />
+              </div>
+              <span className="text-[#50D1AA] text-[12px] font-[500]">
+                +2.40%
+              </span>
+              <div className="w-[18px] h-[18px] bg-[#88E0913D] !p-[1px] rounded-full flex justify-center items-center">
+                <Icons.TopArroww />
+              </div>
             </div>
-            <h1>1,234</h1>
-            <p>Total Revenue</p>
+            <h1 className="text-white text-[28px] font-[600]">1,234</h1>
+            <p className="text-[#ABBBC2] text-[14px] font-[500]">
+              Total Revenue
+            </p>
           </div>
         </div>
         <div className="w-full !h-full bg-[#1F1D2B] rounded-lg">
@@ -58,7 +84,7 @@ export default function Dashboard() {
                 <Icons.filter /> Filter Order
               </button>
             </div>
-            <div className="flex justify-between items-center w-full gap-6 !px-6 !pb-4">
+            <div className="flex justify-between items-center w-full gap-6 !px-6 !pb-4 text-white text-[14px] font-[600]">
               <span>Customer</span>
               <span>Menu</span>
               <span>Total Payment</span>
@@ -66,18 +92,48 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="w-full h-[1px] bg-[#393C49]"></div>
-          <div className="w-full flex flex-col justify-center items-start !p-6">
+          <div className="w-full flex flex-col justify-center items-start !p-6 gap-6">
             <div className="flex justify-between items-start w-full ">
-              <div className="">
-                <img src="" alt="" />
-                <p>Eren Jaegar</p>
+              <div className="flex justify-start items-center gap-4">
+                <div className="w-[32px] h-[32px] bg-[#50d1aa] rounded-full flex justify-center items-center">
+                  <img src={PersonOrder} alt="" className=" " />
+                </div>
+                <p className="text-[#E0E6E9] text-[14px] font-[400]">
+                  Eren Jaegar
+                </p>
               </div>
-              <p className="w-[137px] text-start">
-                Spicy seasoned seafood noodles{" "}
+              <p className="w-[137px] text-start text-[#E0E6E9] text-[14px] font-[400]">
+                Spicy seasoned seafood noodles
               </p>
-              <span className=" text-start">$125</span>
-              <div className="">
-                <span>Completed</span>
+              <span className="text-start text-[#E0E6E9] text-[14px] font-[400]">
+                $125
+              </span>
+              <div className="bg-[#6BE2BE3D] w-[90px] h-[26px] rounded-[30px] flex justify-center items-center">
+                <span className="text-[#50d1aa] text-[14px] font-[400]">
+                  Completed
+                </span>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-start w-full ">
+              <div className="flex justify-start items-center gap-4">
+                <div className="w-[32px] h-[32px] bg-[#50d1aa] rounded-full flex justify-center items-center">
+                  <img src={PersonOrder} alt="" className=" " />
+                </div>
+                <p className="text-[#E0E6E9] text-[14px] font-[400]">
+                  Eren Jaegar
+                </p>
+              </div>
+              <p className="w-[137px] text-start text-[#E0E6E9] text-[14px] font-[400]">
+                Spicy seasoned seafood noodles
+              </p>
+              <span className="text-start text-[#E0E6E9] text-[14px] font-[400]">
+                $125
+              </span>
+              <div className="bg-[#6BE2BE3D] w-[90px] h-[26px] rounded-[30px] flex justify-center items-center">
+                <span className="text-[#50d1aa] text-[14px] font-[400]">
+                  Completed
+                </span>
               </div>
             </div>
           </div>
@@ -156,25 +212,43 @@ export default function Dashboard() {
             />
           </div>
           <div className="w-full h-[1px] bg-[#393C49]"></div>
-          <div className="">
-            <div className=""></div>
-            <div className="">
-              <div className="">
-                <div className="">
-                  <p></p>
-                  <span></span>
+          <div className="flex justify-center items-center gap-6 !pt-8">
+            <div className="relative w-[200px] h-[200px] bg-[#302f3a] rounded-full">
+              <div className="absolute w-full h-full flex justify-center items-center z-0">
+                <div className="absolute w-[98px] h-[98px] bg-[#1F1D2B] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-20"></div>
+                <div className="absolute w-[135px] h-[135px] bg-[#302f3a] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-30"></div>
+                <div className="absolute w-[168px] h-[168px] bg-[#2a2936] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-40"></div>
+              </div>
+              <div className="!z-[999999999]">
+                <Chart />
+              </div>
+            </div>
+            <div className="flex flex-col justify-center items-start gap-4">
+              <div className="flex justify-start items-start gap-2">
+                <div className="bg-[#FF7CA3] w-[18px] h-[18px] rounded-full"></div>
+                <div className="flex flex-col justify-center items-start gap-0.5">
+                  <p className="text-white text-[14px] font-[500]">Dine In</p>
+                  <span className="text-[#ABBBC2] text-[12px] font-[400]">
+                    200 customers
+                  </span>
                 </div>
               </div>
-              <div className="">
-                <div className="">
-                  <p></p>
-                  <span></span>
+              <div className="flex justify-start items-start gap-2">
+                <div className="bg-[#FFB572] w-[18px] h-[18px] rounded-full"></div>
+                <div className="flex flex-col justify-center items-start gap-0.5">
+                  <p className="text-white text-[14px] font-[500]">To Go</p>
+                  <span className="text-[#ABBBC2] text-[12px] font-[400]">
+                    122 customers
+                  </span>
                 </div>
               </div>
-              <div className="">
-                <div className="">
-                  <p></p>
-                  <span></span>
+              <div className="flex justify-start items-start gap-2">
+                <div className="bg-[#65B0F6] w-[18px] h-[18px] rounded-full"></div>
+                <div className="flex flex-col justify-center items-start gap-0.5">
+                  <p className="text-white text-[14px] font-[500]">Delivery</p>
+                  <span className="text-[#ABBBC2] text-[12px] font-[400]">
+                    264 customers
+                  </span>
                 </div>
               </div>
             </div>
