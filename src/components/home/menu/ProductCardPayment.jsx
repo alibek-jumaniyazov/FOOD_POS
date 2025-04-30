@@ -1,24 +1,22 @@
+import { useEffect } from "react";
 import { Icons } from "../../../assets/icons";
-import OrderProduct from "../../../assets/images/MenuImg.png";
+import { useApi } from "../../../context/ApiContext";
 import ProductCardOrder from "./ProductCardOrder";
 
-export default function ProductCardPayment({
-  setProductsPayment,
-  setbgBlack,
-}) {
-  const orders = Array.from({ length: 2 }, (_, i) => ({
-    id: i + 1,
-    title: "Spicy seasoned sea...",
-    price: "$ 2.29",
-    info: "",
-    image: OrderProduct,
-    total: "$ 2.29",
-    count: 1,
-  }));
+export default function ProductCardPayment({ setProductsPayment, setbgBlack }) {
+  const { cart } = useApi();
+
   function backPayment() {
     setProductsPayment(false);
     setbgBlack(false);
   }
+
+  useEffect(() => {
+    setProductsPayment(false);
+    setbgBlack(false);
+  }, [cart?.items?.length == 0]);
+
+  console.log(cart);
 
   return (
     <div className="!w-[460px] h-screen flex flex-col justify-between items-center bg-[#1F1D2B] rounded-tl-lg rounded-bl-lg !p-8">
@@ -44,7 +42,7 @@ export default function ProductCardPayment({
           </button>
         </div>
         <div className="w-full h-[513px] flex flex-col justify-start items-center gap-6 overflow-y-auto">
-          {orders.map((order) => (
+          {cart?.items?.map((order) => (
             <ProductCardOrder order={order} key={order.id} />
           ))}
         </div>

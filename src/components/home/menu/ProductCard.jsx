@@ -2,24 +2,19 @@ import { Button, message } from "antd";
 import OrderProduct from "../../../assets/images/MenuImg.png";
 import ProductCardOrder from "./ProductCardOrder";
 import toast, { Toaster } from "react-hot-toast";
+import { useApi } from "../../../context/ApiContext";
+import { useState } from "react";
 
 export default function ProductCard({
   productsPayment,
   setProductsPayment,
   setbgBlack,
 }) {
-  const orders = Array.from({ length: 2 }, (_, i) => ({
-    id: i + 1,
-    title: "Spicy seasoned sea...",
-    price: "$ 2.29",
-    info: "",
-    image: OrderProduct,
-    total: "$ 2.29",
-    count: 1,
-  }));
+  const { cart } = useApi();
+  const [selectedType, setSelectedType] = useState("Dine In");
 
   function openPayment() {
-    if (orders.length > 0) {
+    if (cart?.items?.length > 0) {
       setProductsPayment(true);
       setbgBlack(true);
     } else {
@@ -34,6 +29,8 @@ export default function ProductCard({
     }
   }
 
+  console.log(cart);
+
   return (
     <>
       <Toaster
@@ -46,15 +43,20 @@ export default function ProductCard({
           <div className="w-full flex flex-col justify-center items-start gap-6 border-b border-[#393c49] !pb-6">
             <h1 className="text-[20px] font-[600] text-white">Orders #34562</h1>
             <div className="flex justify-start items-center gap-2">
-              <button className="rounded-lg cursor-pointer w-[66px] bg-[#EA7C69] text-white !p-[7px] text-[14px] font-[600] hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%] ">
-                Dine In
-              </button>
-              <button className="rounded-lg cursor-pointer w-[66px] bg-transparent border border-[#393c49] !p-[7px] text-[#EA7C69] text-[14px] font-[600] hover:text-white hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%] ">
-                To Go
-              </button>
-              <button className="rounded-lg cursor-pointer w-[66px] bg-transparent border border-[#393c49] !p-[7px] text-[#EA7C69] text-[14px] font-[600] hover:text-white hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%] ">
-                Delivery
-              </button>
+              {["Dine In", "To Go", "Delivery"].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setSelectedType(type)}
+                  className={`rounded-lg cursor-pointer w-[66px] !p-[7px] text-[14px] font-[600] transition-all duration-300 active:scale-[80%] 
+                    ${
+                      selectedType === type
+                        ? "bg-[#EA7C69] text-white hover:bg-[#ea7c698e] "
+                        : "bg-transparent border border-[#393c49]  text-[#EA7C69] hover:text-white hover:bg-[#ea7c698e]"
+                    }`}
+                >
+                  {type}
+                </button>
+              ))}
             </div>
             <div className="w-full flex justify-between items-center">
               <div className="">
@@ -67,7 +69,7 @@ export default function ProductCard({
             </div>
           </div>
           <div className="w-full h-[513px] flex flex-col justify-start items-center gap-6 overflow-y-auto">
-            {orders.map((order) => (
+            {cart?.items?.map((order) => (
               <ProductCardOrder order={order} key={order.id} />
             ))}
           </div>
@@ -78,13 +80,17 @@ export default function ProductCard({
               <span className="text-[#889898] font-[400] text-[14px]">
                 Discount
               </span>
-              <p className="text-white font-[500] text-[16px]">$0</p>
+              <p className="text-white font-[500] text-[16px]">
+                {cart?.discount || "$0.00"}
+              </p>
             </div>
             <div className="w-full flex justify-between items-center ">
               <span className="text-[#889898] font-[400] text-[14px]">
                 Sub total
               </span>
-              <p className="text-white font-[500] text-[16px]">$ 21,03</p>
+              <p className="text-white font-[500] text-[16px]">
+                {cart?.totalPrice || "$0.00"}
+              </p>
             </div>
           </div>
           <div

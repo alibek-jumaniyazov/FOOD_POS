@@ -1,19 +1,12 @@
-import React from 'react';
-import MenuImg from "../../assets/images/MenuImg.png";
-import Product from '../../components/home/menu/Product';
+import Product from "../../components/home/menu/Product";
+import { useApi } from "../../context/ApiContext";
 
 export default function HotDishes() {
-  const orders = Array.from({ length: 6 }, (_, i) => ({
-    id: i + 1,
-    title: "Spicy seasoned seafood noodles",
-    price: "$ 2.29",
-    availability: "20 Bowls available",
-    image: MenuImg,
-  }));
+  const { productsHot } = useApi();
 
   return (
-    <div className='HotDishes flex flex-wrap gap-y-[90px] gap-x-7 justify-start items-start h-[620px] overflow-y-auto overflow-x-hidden !pt-[70px]'>
-      {orders.map((order) => (
+    <div className="HotDishes flex flex-wrap gap-y-[90px] gap-x-7 justify-start items-start h-[620px] overflow-y-auto overflow-x-hidden !pt-[70px]">
+      {productsHot.map((order) => (
         <Product key={order.id} order={order} />
       ))}
     </div>

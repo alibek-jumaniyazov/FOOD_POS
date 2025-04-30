@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import { Icons } from "../../../assets/icons";
 import { Select } from "antd";
 
-export default function ProductsPayment({
-  setProductsPayment,
-  setbgBlack,
-}) {
+export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
   const [cardNumber, setCardNumber] = useState("");
+  const [selectedMethod, setSelectedMethod] = useState("credit");
 
   const formatCardNumber = (value) => {
-    // Faqat raqamlarni olib tashlaydi
     const rawValue = value.replace(/\D/g, "").slice(0, 16);
-    // Har 4 raqamdan keyin bo'sh joy qo'shadi
     const formattedValue = rawValue.replace(/(.{4})/g, "$1 ").trim();
     return formattedValue;
   };
@@ -53,87 +49,178 @@ export default function ProductsPayment({
         <div className="w-full flex flex-col justify-center items-start gap-4">
           <h1 className="text-[20px] font-[600] text-white">Payment Method</h1>
           <div className="w-full flex justify-start items-center gap-2">
-            <div className="relative flex flex-col justify-center items-center w-[101px] h-[64px] bg-[#252836] border border-[#ABBBC2] rounded-lg  cursor-pointer hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%]">
-              <Icons.paymentCheck className="absolute top-1.5 right-1.5 " />
-              <Icons.payCard className="!fill-white" />
-              <p className="text-[14px] font-[600] text-white">Credit Card</p>
-            </div>
-            <div className="relative flex flex-col justify-center items-center w-[101px] h-[64px]  border border-[#393C49] rounded-lg  cursor-pointer hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%]">
-              {/* <Icons.paymentCheck className="absolute top-1.5 right-1.5" /> */}
-              <Icons.paypal className="!stroke-[#ABBBC2]" />
-              <p className="text-[14px] font-[600] text-[#ABBBC2]">Paypal</p>
-            </div>
-            <div className="relative flex flex-col justify-center items-center w-[101px] h-[64px]  border border-[#393C49] rounded-lg  cursor-pointer hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%]">
-              {/* <Icons.paymentCheck className="absolute top-1.5 right-1.5" /> */}
-              <Icons.wallet className="!fill-[#ABBBC2]" />
-              <p className="text-[14px] font-[600] text-[#ABBBC2]">Cash</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 w-full border-b border-[#393c49] !pb-4">
-            <div className="flex flex-col gap-2">
-              <p className="text-[14px] font-[500] text-white">
-                Cardholder Name
-              </p>
-              <input
-                type="text"
-                name="cc-name"
-                autoComplete="cc-name"
-                placeholder="Levi Ackerman"
-                className="w-full !p-[14px] rounded-lg bg-[#2D303E] border border-[#393C49] outline-none text-white"
-                required
+            {/* Credit Card */}
+            <div
+              onClick={() => setSelectedMethod("credit")}
+              className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
+      ${
+        selectedMethod === "credit"
+          ? "bg-[#252836] border-[#ABBBC2]"
+          : "border-[#393C49]"
+      }
+      hover:bg-[#ea7c698e]`}
+            >
+              {selectedMethod === "credit" && (
+                <Icons.paymentCheck className="absolute top-1.5 right-1.5" />
+              )}
+              <Icons.payCard
+                className={
+                  selectedMethod === "credit"
+                    ? "!fill-white"
+                    : "!fill-[#ABBBC2]"
+                }
               />
+              <p
+                className={`text-[14px] font-[600] ${
+                  selectedMethod === "credit" ? "text-white" : "text-[#ABBBC2]"
+                }`}
+              >
+                Credit Card
+              </p>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <p className="text-[14px] font-[500] text-white">Card Number</p>
-              <input
-                type="text"
-                name="cc-number"
-                autoComplete="cc-number"
-                inputMode="numeric"
-                pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
-                placeholder="2564 1421 0897 1244"
-                maxLength={19}
-                value={cardNumber}
-                onChange={handleCardNumberChange}
-                className="w-full !p-[14px] rounded-lg bg-[#2D303E] border border-[#393C49] outline-none text-white"
-                required
+            {/* Paypal */}
+            <div
+              onClick={() => setSelectedMethod("paypal")}
+              className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
+      ${
+        selectedMethod === "paypal"
+          ? "bg-[#252836] border-[#ABBBC2]"
+          : "border-[#393C49]"
+      }
+      hover:bg-[#ea7c698e]`}
+            >
+              {selectedMethod === "paypal" && (
+                <Icons.paymentCheck className="absolute top-1.5 right-1.5" />
+              )}
+              <Icons.paypal
+                className={`!stroke-[${
+                  selectedMethod === "paypal" ? "#ffffff" : "#ABBBC2"
+                }]`}
               />
+              <p
+                className={`text-[14px] font-[600] ${
+                  selectedMethod === "paypal" ? "text-white" : "text-[#ABBBC2]"
+                }`}
+              >
+                Paypal
+              </p>
             </div>
-            <div className="flex justify-between gap-3">
+
+            {/* Cash */}
+            <div
+              onClick={() => setSelectedMethod("cash")}
+              className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
+      ${
+        selectedMethod === "cash"
+          ? "bg-[#252836] border-[#ABBBC2]"
+          : "border-[#393C49]"
+      }
+      hover:bg-[#ea7c698e]`}
+            >
+              {selectedMethod === "cash" && (
+                <Icons.paymentCheck className="absolute top-1.5 right-1.5" />
+              )}
+              <Icons.wallet
+                className={
+                  selectedMethod === "cash" ? "!fill-white" : "!fill-[#ABBBC2]"
+                }
+              />
+              <p
+                className={`text-[14px] font-[600] ${
+                  selectedMethod === "cash" ? "text-white" : "text-[#ABBBC2]"
+                }`}
+              >
+                Cash
+              </p>
+            </div>
+          </div>
+
+          {selectedMethod === "credit" ? (
+            <div className="flex flex-col gap-4 w-full border-b border-[#393c49] !pb-4">
               <div className="flex flex-col gap-2">
                 <p className="text-[14px] font-[500] text-white">
-                  Expiration Date
+                  Cardholder Name
                 </p>
                 <input
                   type="text"
-                  name="cc-exp"
-                  autoComplete="cc-exp"
-                  inputMode="numeric"
-                  placeholder="MM/YY"
-                  maxLength={5}
-                  value={expirationDate}
-                  onChange={handleExpirationChange}
+                  name="cc-name"
+                  autoComplete="cc-name"
+                  placeholder="Levi Ackerman"
                   className="w-full !p-[14px] rounded-lg bg-[#2D303E] border border-[#393C49] outline-none text-white"
                   required
                 />
               </div>
+
               <div className="flex flex-col gap-2">
-                <p className="text-[14px] font-[500] text-white">CVV</p>
+                <p className="text-[14px] font-[500] text-white">Card Number</p>
                 <input
-                  type="password"
-                  name="cc-csc"
-                  autoComplete="cc-csc"
+                  type="text"
+                  name="cc-number"
+                  autoComplete="cc-number"
                   inputMode="numeric"
-                  pattern="\d{3,4}"
-                  maxLength={3}
-                  placeholder="CVC"
+                  pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
+                  placeholder="2564 1421 0897 1244"
+                  maxLength={19}
+                  value={cardNumber}
+                  onChange={handleCardNumberChange}
                   className="w-full !p-[14px] rounded-lg bg-[#2D303E] border border-[#393C49] outline-none text-white"
                   required
                 />
+              </div>
+              <div className="flex justify-between gap-3">
+                <div className="flex flex-col gap-2">
+                  <p className="text-[14px] font-[500] text-white">
+                    Expiration Date
+                  </p>
+                  <input
+                    type="text"
+                    name="cc-exp"
+                    autoComplete="cc-exp"
+                    inputMode="numeric"
+                    placeholder="MM/YY"
+                    maxLength={5}
+                    value={expirationDate}
+                    onChange={handleExpirationChange}
+                    className="w-full !p-[14px] rounded-lg bg-[#2D303E] border border-[#393C49] outline-none text-white"
+                    required
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-[14px] font-[500] text-white">CVV</p>
+                  <input
+                    type="password"
+                    name="cc-csc"
+                    autoComplete="cc-csc"
+                    inputMode="numeric"
+                    pattern="\d{3,4}"
+                    maxLength={3}
+                    placeholder="CVC"
+                    className="w-full !p-[14px] rounded-lg bg-[#2D303E] border border-[#393C49] outline-none text-white"
+                    required
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
+
+          {selectedMethod === "paypal" ? (
+            <div className="flex flex-col gap-4 w-full border-b border-[#393c49] !pb-4">
+              <h1>PayPal</h1>
+            </div>
+          ) : (
+            ""
+          )}
+
+          {selectedMethod === "cash" ? (
+            <div className="flex flex-col gap-4 w-full border-b border-[#393c49] !pb-4">
+              <h1>Cash</h1>
+            </div>
+          ) : (
+            ""
+          )}
           <div className="flex justify-between gap-3">
             <div className="flex flex-col gap-2">
               <p className="text-[14px] font-[500] text-white">Order Type</p>

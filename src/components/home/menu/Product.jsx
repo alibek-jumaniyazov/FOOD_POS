@@ -1,7 +1,11 @@
+import { useApi } from "../../../context/ApiContext";
 
 export default function Product({ order }) {
+  const { postCrat } = useApi();
+
   return (
     <div
+      onClick={() => postCrat({ productId: order.id, count: 1 })}
       key={order.id}
       className="cursor-pointer flex flex-col justify-center items-center gap-4 !p-6 w-[192px] h-[226px] bg-[#1F1D2B] rounded-[16px] hover:transform-gpu hover:scale-[1.02] transition duration-300 ease-in-out"
     >
