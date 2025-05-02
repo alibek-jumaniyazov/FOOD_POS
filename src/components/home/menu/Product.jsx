@@ -1,6 +1,6 @@
 import { useApi } from "../../../context/ApiContext";
 
-export default function Product({ order }) {
+export default function xProduct({ order }) {
   const { postCrat } = useApi();
 
   return (

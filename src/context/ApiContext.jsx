@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   addCart,
   deleteCart,
+  deleteProduct,
   fetchCart,
   fetchProducts,
   putCart,
@@ -19,6 +20,17 @@ export const ApiProvider = ({ children }) => {
     try {
       const response = await fetchProducts();
       setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const removeProduct = async (category, id) => {
+    try {
+      const response = await deleteProduct(category, id);
+      console.log(response.status);
+      getProductsHotDishes();
+      getProductsColdDishes();
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -95,6 +107,7 @@ export const ApiProvider = ({ children }) => {
     getProductsHotDishes,
     getProductsColdDishes,
     getProducts,
+    removeProduct,
     getCart,
     deletCart,
     postCrat,
