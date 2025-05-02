@@ -21,7 +21,7 @@ export default function xProduct({ order }) {
         {order.price}
       </p>
       <span className="text-center text-[14px] font-[400] text-[#abbbc2]">
-        {order.availability}
+        {order.availability} Bowls available
       </span>
     </div>
   );

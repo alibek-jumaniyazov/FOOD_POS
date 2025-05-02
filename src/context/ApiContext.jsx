@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   addCart,
+  addProduct,
   deleteCart,
   deleteProduct,
+  editProduct,
   fetchCart,
   fetchProducts,
   putCart,
@@ -22,6 +24,30 @@ export const ApiProvider = ({ children }) => {
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
+    }
+  };
+
+  const postProduct = async (category, product) => {
+    try {
+      const response = await addProduct(category, product);
+      console.log(response.status);
+      getProductsHotDishes();
+      getProductsColdDishes();
+    } catch (err) {
+      alert("Error post product");
+      console.error(err);
+    }
+  };
+
+  const putProduct = async (category, id, updatedProduct) => {
+    try {
+      const response = await editProduct(category, id, updatedProduct);
+      console.log(response.status);
+      getProductsHotDishes();
+      getProductsColdDishes();
+    } catch (err) {
+      alert("Error post product");
+      console.error(err);
     }
   };
 
@@ -107,6 +133,8 @@ export const ApiProvider = ({ children }) => {
     getProductsHotDishes,
     getProductsColdDishes,
     getProducts,
+    postProduct,
+    putProduct,
     removeProduct,
     getCart,
     deletCart,

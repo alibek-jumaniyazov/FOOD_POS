@@ -69,10 +69,22 @@ body {
   transition: all 0.3s ease;
   fill: white !important;
 }
-.ProductPost{
-  color: #EA7C69!important;
-  stroke: #EA7C69!important;
+.ProductPost {
+  color: #ea7c69 !important;
+  stroke: #ea7c69 !important;
 }
-.ProductPost:hover{
-  background-color: #EA7C6942!important;
+.ProductPost:hover {
+  background-color: #ea7c6942 !important;
+}
+.ant-upload .ant-upload-select span {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ant-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100% !important;
 }

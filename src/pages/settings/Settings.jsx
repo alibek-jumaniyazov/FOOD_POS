@@ -42,6 +42,7 @@ export default function Settings() {
             ))}
           </Routes>
         </div>
+       
       </div>
     </div>
   );
