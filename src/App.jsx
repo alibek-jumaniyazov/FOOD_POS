@@ -37,7 +37,7 @@ function App() {
             ))}
           </Route>
         )}
-        {/*Agar page bo'lmasa */}
+
         <Route
           path="*"
           element={<Navigate to={isAuthenticated ? "/order" : "/login"} replace />}

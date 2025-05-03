@@ -9,6 +9,7 @@ import {
   fetchProducts,
   putCart,
 } from "../api/api.js";
+import dayjs from "dayjs";
 
 const ApiContext = createContext();
 
@@ -31,6 +32,7 @@ export const ApiProvider = ({ children }) => {
     try {
       const response = await addProduct(category, product);
       console.log(response.status);
+      getProducts();
       getProductsHotDishes();
       getProductsColdDishes();
     } catch (err) {
@@ -43,6 +45,7 @@ export const ApiProvider = ({ children }) => {
     try {
       const response = await editProduct(category, id, updatedProduct);
       console.log(response.status);
+      getProducts();
       getProductsHotDishes();
       getProductsColdDishes();
     } catch (err) {
@@ -55,6 +58,7 @@ export const ApiProvider = ({ children }) => {
     try {
       const response = await deleteProduct(category, id);
       console.log(response.status);
+      getProducts();
       getProductsHotDishes();
       getProductsColdDishes();
     } catch (error) {
