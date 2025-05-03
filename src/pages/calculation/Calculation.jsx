@@ -1,7 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default function Calculation() {
   return (
-    <div className='Calculation'>Calculation</div>
-  )
+    <div className="flex justify-between items-start w-full h-full ">
+      <div className="flex flex-col gap-10 !p-6 w-[80%]">Calculation</div>
+    </div>
+  );
 }

@@ -19,7 +19,7 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
   const [expirationDate, setExpirationDate] = useState("");
 
   const handleExpirationChange = (e) => {
-    let value = e.target.value.replace(/\D/g, ""); // faqat raqam
+    let value = e.target.value.replace(/\D/g, "");
     if (value.length >= 3) {
       value = value.slice(0, 2) + "/" + value.slice(2, 4);
     }
@@ -49,7 +49,6 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
         <div className="w-full flex flex-col justify-center items-start gap-4">
           <h1 className="text-[20px] font-[600] text-white">Payment Method</h1>
           <div className="w-full flex justify-start items-center gap-2">
-            {/* Credit Card */}
             <div
               onClick={() => setSelectedMethod("credit")}
               className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
