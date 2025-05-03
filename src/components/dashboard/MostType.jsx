@@ -1,8 +1,18 @@
 import React from "react";
 import Chart from "./Chart";
 import { Select } from "antd";
+import { useApi } from "../../context/ApiContext";
 
 export default function MostType() {
+  const { orders } = useApi();
+
+  const countTypes = orders
+    .map((item) => item)
+    .reduce((acc, order) => {
+      acc[order.diningOption] = (acc[order.diningOption] || 0) + 1;
+      return acc;
+    }, {});
+
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -35,7 +45,7 @@ export default function MostType() {
             <div className="absolute w-[168px] h-[168px] bg-[#2a2936] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-40"></div>
           </div>
           <div className="!z-[999999999]">
-            <Chart />
+            <Chart countTypes={countTypes} />
           </div>
         </div>
         <div className="flex flex-col justify-center items-start gap-4">
@@ -44,7 +54,7 @@ export default function MostType() {
             <div className="flex flex-col justify-center items-start gap-0.5">
               <p className="text-white text-[14px] font-[500]">Dine In</p>
               <span className="text-[#ABBBC2] text-[12px] font-[400]">
-                200 customers
+                {countTypes["Dine In"] || 0} customers
               </span>
             </div>
           </div>
@@ -53,7 +63,7 @@ export default function MostType() {
             <div className="flex flex-col justify-center items-start gap-0.5">
               <p className="text-white text-[14px] font-[500]">To Go</p>
               <span className="text-[#ABBBC2] text-[12px] font-[400]">
-                122 customers
+                {countTypes["To Go"] || 0} customers
               </span>
             </div>
           </div>
@@ -62,7 +72,7 @@ export default function MostType() {
             <div className="flex flex-col justify-center items-start gap-0.5">
               <p className="text-white text-[14px] font-[500]">Delivery</p>
               <span className="text-[#ABBBC2] text-[12px] font-[400]">
-                264 customers
+                {countTypes["Delivery"] || 0} customers
               </span>
             </div>
           </div>

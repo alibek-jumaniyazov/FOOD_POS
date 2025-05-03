@@ -1,7 +1,10 @@
-import PersonOrder from "../../assets/images/PersonOrder.png";
 import { Icons } from "../../assets/icons";
+import { useApi } from "../../context/ApiContext";
 import UserOrder from "./UserOrder";
 export default function OrderReports() {
+  const { orders } = useApi();
+  console.log(orders);
+
   return (
     <div className="w-full !h-full bg-[#1F1D2B] rounded-lg">
       <div className="">
@@ -20,8 +23,9 @@ export default function OrderReports() {
       </div>
       <div className="w-full h-[1px] bg-[#393C49]"></div>
       <div className="w-full flex flex-col justify-center items-start !p-6 gap-6">
-        <UserOrder />
-        <UserOrder />
+        {orders.map((order) => (
+          <UserOrder order={order} key={order.id} />
+        ))}
       </div>
     </div>
   );

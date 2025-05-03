@@ -88,3 +88,16 @@ body {
   align-items: center;
   width: 100% !important;
 }
+.ellipsis-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80px;
+}
+.ellipsis-menu {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 137px;
+  margin-left: -20px;
+}

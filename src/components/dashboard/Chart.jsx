@@ -1,14 +1,17 @@
 import React from "react";
 
-export default function Chart() {
+export default function Chart({ countTypes }) {
   const data = [
-    { value: 250, color: "#FF7CA3", radius: 60 },
-    { value: 200, color: "#FFB572", radius: 75 },
-    { value: 300, color: "#65B0F6", radius: 90 },
+    { value: countTypes["Dine In"] || 0.001, color: "#FF7CA3", radius: 60 },
+    { value: countTypes["To Go"] || 0.001, color: "#FFB572", radius: 75 },
+    { value: countTypes["Delivery"] || 0.001, color: "#65B0F6", radius: 90 },
   ];
 
-  const total = 400;
+  const total = data.reduce((acc, item) => acc + item.value, 0);
+
   const center = 100;
+
+  if (total === 0) return <p className="text-white">No orders available</p>;
 
   return (
     <svg
@@ -18,8 +21,8 @@ export default function Chart() {
       className="rotate-[-90deg]"
     >
       {data.map((item, index) => {
-        const circumference = 2 * Math.PI * item.radius;
-        const offset = circumference * (1 - item.value / total);
+        const circumference = 2 * Math.PI * item.radius; // Umumiy doira uzunligi
+        const offset = circumference * (1 - item.value / total); // Segmentni boshlash joyi
 
         return (
           <circle

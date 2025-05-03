@@ -6,7 +6,7 @@ import Appereance from "../components/settings/SettingsComponents/Appereance";
 export const SettingsRoute = [
   {
     id: 1,
-    element: <Navigate to="appereance" />,
+    element: <Navigate to="products-management" />,
     fallback: <h1>Loading...</h1>,
   },
 
