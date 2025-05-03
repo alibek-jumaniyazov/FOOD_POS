@@ -79,7 +79,6 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
               </p>
             </div>
 
-            {/* Paypal */}
             <div
               onClick={() => setSelectedMethod("paypal")}
               className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
@@ -95,7 +94,7 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
               )}
               <Icons.paypal
                 className={`!stroke-[${
-                  selectedMethod === "paypal" ? "#ffffff" : "#ABBBC2"
+                  selectedMethod === "paypal" ? "#ABBBC2" : "#ABBBC2"
                 }]`}
               />
               <p
@@ -107,7 +106,6 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
               </p>
             </div>
 
-            {/* Cash */}
             <div
               onClick={() => setSelectedMethod("cash")}
               className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
