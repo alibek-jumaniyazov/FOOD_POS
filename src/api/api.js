@@ -15,4 +15,11 @@ export const addProduct = (category, product) =>
 export const fetchCart = () => API.get("/cart");
 export const addCart = (product) => API.post("/cart", product);
 export const deleteCart = (id) => API.delete(`/cart/${id}`);
-export const putCart = (id, count) => API.put(`/cart/${id}`, { count });
+export const putCart = (id, count, note) =>
+  API.put(`/cart/${id}`, { count, note });
+
+export const fetchOrders = () => API.get("/orders");
+export const addOrder = (product) => API.post("/orders", product);
+export const deleteOrder = (id) => API.delete(`/orders/${id}`);
+export const putOrder = (id, status) =>
+  API.put(`/orders/${id}/status`, { status });

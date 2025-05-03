@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { Icons } from "../../../assets/icons";
 import { Select } from "antd";
+import { useApi } from "../../../context/ApiContext";
 
-export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
+export default function ProductsPayment({
+  setProductsPayment,
+  setbgBlack,
+  paymentMethod,
+  setPaymentMethod,
+  diningOption,
+  setDiningOption,
+  confirmOrder,
+}) {
+  const { cart } = useApi();
   const [cardNumber, setCardNumber] = useState("");
-  const [selectedMethod, setSelectedMethod] = useState("credit");
+  const [tableNumber, setTableNumber] = useState("");
 
   const formatCardNumber = (value) => {
     const rawValue = value.replace(/\D/g, "").slice(0, 16);
@@ -26,8 +36,8 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
     setExpirationDate(value);
   };
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  const handleChangeSelect = (value) => {
+    setDiningOption(value);
   };
 
   function backPayment() {
@@ -50,28 +60,26 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
           <h1 className="text-[20px] font-[600] text-white">Payment Method</h1>
           <div className="w-full flex justify-start items-center gap-2">
             <div
-              onClick={() => setSelectedMethod("credit")}
+              onClick={() => setPaymentMethod("credit")}
               className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
       ${
-        selectedMethod === "credit"
+        paymentMethod === "credit"
           ? "bg-[#252836] border-[#ABBBC2]"
           : "border-[#393C49]"
       }
       hover:bg-[#ea7c698e]`}
             >
-              {selectedMethod === "credit" && (
+              {paymentMethod === "credit" && (
                 <Icons.paymentCheck className="absolute top-1.5 right-1.5" />
               )}
               <Icons.payCard
                 className={
-                  selectedMethod === "credit"
-                    ? "!fill-white"
-                    : "!fill-[#ABBBC2]"
+                  paymentMethod === "credit" ? "!fill-white" : "!fill-[#ABBBC2]"
                 }
               />
               <p
                 className={`text-[14px] font-[600] ${
-                  selectedMethod === "credit" ? "text-white" : "text-[#ABBBC2]"
+                  paymentMethod === "credit" ? "text-white" : "text-[#ABBBC2]"
                 }`}
               >
                 Credit Card
@@ -79,26 +87,26 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
             </div>
 
             <div
-              onClick={() => setSelectedMethod("paypal")}
+              onClick={() => setPaymentMethod("paypal")}
               className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
       ${
-        selectedMethod === "paypal"
+        paymentMethod === "paypal"
           ? "bg-[#252836] border-[#ABBBC2]"
           : "border-[#393C49]"
       }
       hover:bg-[#ea7c698e]`}
             >
-              {selectedMethod === "paypal" && (
+              {paymentMethod === "paypal" && (
                 <Icons.paymentCheck className="absolute top-1.5 right-1.5" />
               )}
               <Icons.paypal
                 className={`!stroke-[${
-                  selectedMethod === "paypal" ? "#ABBBC2" : "#ABBBC2"
+                  paymentMethod === "paypal" ? "#ABBBC2" : "#ABBBC2"
                 }]`}
               />
               <p
                 className={`text-[14px] font-[600] ${
-                  selectedMethod === "paypal" ? "text-white" : "text-[#ABBBC2]"
+                  paymentMethod === "paypal" ? "text-white" : "text-[#ABBBC2]"
                 }`}
               >
                 Paypal
@@ -106,26 +114,26 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
             </div>
 
             <div
-              onClick={() => setSelectedMethod("cash")}
+              onClick={() => setPaymentMethod("cash")}
               className={`relative flex flex-col justify-center items-center w-[101px] h-[64px] rounded-lg border cursor-pointer transition-all duration-300 active:scale-[80%]
       ${
-        selectedMethod === "cash"
+        paymentMethod === "cash"
           ? "bg-[#252836] border-[#ABBBC2]"
           : "border-[#393C49]"
       }
       hover:bg-[#ea7c698e]`}
             >
-              {selectedMethod === "cash" && (
+              {paymentMethod === "cash" && (
                 <Icons.paymentCheck className="absolute top-1.5 right-1.5" />
               )}
               <Icons.wallet
                 className={
-                  selectedMethod === "cash" ? "!fill-white" : "!fill-[#ABBBC2]"
+                  paymentMethod === "cash" ? "!fill-white" : "!fill-[#ABBBC2]"
                 }
               />
               <p
                 className={`text-[14px] font-[600] ${
-                  selectedMethod === "cash" ? "text-white" : "text-[#ABBBC2]"
+                  paymentMethod === "cash" ? "text-white" : "text-[#ABBBC2]"
                 }`}
               >
                 Cash
@@ -133,7 +141,7 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
             </div>
           </div>
 
-          {selectedMethod === "credit" ? (
+          {paymentMethod === "credit" ? (
             <div className="flex flex-col gap-4 w-full border-b border-[#393c49] !pb-4">
               <div className="flex flex-col gap-2">
                 <p className="text-[14px] font-[500] text-white">
@@ -203,7 +211,7 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
             ""
           )}
 
-          {selectedMethod === "paypal" ? (
+          {paymentMethod === "paypal" ? (
             <div className="flex flex-col gap-4 w-full border-b border-[#393c49] !pb-4">
               <h1>PayPal</h1>
             </div>
@@ -211,7 +219,7 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
             ""
           )}
 
-          {selectedMethod === "cash" ? (
+          {paymentMethod === "cash" ? (
             <div className="flex flex-col gap-4 w-full border-b border-[#393c49] !pb-4">
               <h1>Cash</h1>
             </div>
@@ -223,21 +231,23 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
               <p className="text-[14px] font-[500] text-white">Order Type</p>
               <Select
                 defaultValue="Dine In"
+                value={diningOption}
                 style={{ width: "191px" }}
                 className="!h-[54px]"
-                onChange={handleChange}
+                onChange={handleChangeSelect}
                 options={[
                   { value: "Dine In", label: "Dine In" },
-                  { value: "Take Away", label: "Take Away" },
+                  { value: "To Go", label: "To Go" },
                   { value: "Delivery", label: "Delivery" },
-                  { value: "Catering", label: "Catering" },
                 ]}
               />
             </div>
             <div className="flex flex-col gap-2">
               <p className="text-[14px] font-[500] text-white">Table no.</p>
               <input
-                type="text"
+                value={tableNumber}
+                onChange={(e) => setTableNumber(e.target.value)}
+                type="number"
                 placeholder="140"
                 className="w-full !p-[14px] rounded-lg bg-[#2D303E] border border-[#393C49] outline-none text-white"
               />
@@ -252,7 +262,10 @@ export default function ProductsPayment({ setProductsPayment, setbgBlack }) {
         >
           Cancel
         </button>
-        <button className="w-full !p-3.5 text-white bg-[#EA7C69] rounded-lg cursor-pointer text-[14px] font-[600] shadow-[0px_8px_24px_0px_#EA7C6966] hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%]">
+        <button
+          onClick={() => confirmOrder(cart, tableNumber, cart.totalPrice)}
+          className="w-full !p-3.5 text-white bg-[#EA7C69] rounded-lg cursor-pointer text-[14px] font-[600] shadow-[0px_8px_24px_0px_#EA7C6966] hover:bg-[#ea7c698e] transition-all duration-300 active:scale-[80%]"
+        >
           Confirm Payment
         </button>
       </div>

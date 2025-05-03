@@ -11,8 +11,27 @@ import { Icons } from "../../assets/icons";
 import { useApi } from "../../context/ApiContext";
 
 export default function Home() {
-  const { products } = useApi();
+  const { products, cart, postOrders } = useApi();
   const [search, setSearch] = useState("");
+  const [diningOption, setDiningOption] = useState("Dine In");
+  const [paymentMethod, setPaymentMethod] = useState("credit");
+
+  const confirmOrder = (cart, tableNumber, totalPrice) => {
+    const ordersForm = {
+      customer: {
+        name: "Alibek Jumaniyazov",
+        email: "lokaydo@example.com",
+      },
+      products: cart.items,
+      paymentMethod: paymentMethod,
+      diningOption: diningOption,
+      totalPrice: totalPrice,
+      tableNumber: tableNumber,
+    };
+    postOrders(ordersForm);
+    console.log(ordersForm);
+  };
+
   const [productsPayment, setProductsPayment] = useState(false);
   const [bgBlack, setbgBlack] = useState(false);
   const [currentDate, setCurrentDate] = useState(getDate());
@@ -26,8 +45,8 @@ export default function Home() {
       year: "numeric",
     });
   }
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  const handleChangeSelect = (value) => {
+    console.log(value);
   };
 
   const handleSearchProducts = (e) => {
@@ -89,14 +108,14 @@ export default function Home() {
               </h1>
             )}
             <Select
-              defaultValue="Dine In"
+              defaultValue="Dine-In"
+              // value={diningOption}
               style={{ width: 100 }}
-              onChange={handleChange}
+              onChange={handleChangeSelect}
               options={[
-                { value: "Dine In", label: "Dine In" },
-                { value: "Take Away", label: "Take Away" },
+                { value: "Dine-In", label: "Dine In" },
+                { value: "To-Go", label: "To Go" },
                 { value: "Delivery", label: "Delivery" },
-                { value: "Catering", label: "Catering" },
               ]}
             />
           </div>
@@ -146,6 +165,11 @@ export default function Home() {
           <ProductsPayment
             setProductsPayment={setProductsPayment}
             setbgBlack={setbgBlack}
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+            diningOption={diningOption}
+            setDiningOption={setDiningOption}
+            confirmOrder={confirmOrder}
           />
         ) : null}
       </div>
@@ -153,6 +177,8 @@ export default function Home() {
         productsPayment={productsPayment}
         setProductsPayment={setProductsPayment}
         setbgBlack={setbgBlack}
+        diningOption={diningOption}
+        setDiningOption={setDiningOption}
       />
     </div>
   );

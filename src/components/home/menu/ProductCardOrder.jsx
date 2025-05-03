@@ -6,18 +6,19 @@ import { useApi } from "../../../context/ApiContext";
 export default function ProductCardOrder({ order }) {
   const { deletCart, updateCart } = useApi();
   const [productCount, setProductCount] = useState(order.count);
-  const [productInfo, setProductInfo] = useState("");
+  const [productInfo, setProductInfo] = useState(order.note);
 
   useEffect(() => {
     setProductCount(order.count);
-  }, [order.count]);
+    setProductInfo(order.note);
+  }, [order.count, order.note]);
 
   const handleChange = async (e) => {
     const { value: inputValue } = e.target;
     const reg = /^-?\d*(\.\d*)?$/;
+    const numericValue = Number(inputValue);
 
     if (reg.test(inputValue) || inputValue === "" || inputValue === "-") {
-      const numericValue = Number(inputValue);
       if (inputValue === "") {
         setProductCount("");
       } else if (numericValue <= 0) {
@@ -26,8 +27,15 @@ export default function ProductCardOrder({ order }) {
         setProductCount(inputValue);
       }
       if (numericValue > 0) {
-        updateCart(order.id, numericValue);
+        updateCart(order.id, numericValue, productInfo);
       }
+    }
+  };
+
+  const handleSendNote = (value) => {
+    setProductInfo(value);
+    if (productCount !== " " && productCount !== order.note) {
+      updateCart(order.id, productCount, value);
     }
   };
 
@@ -58,7 +66,7 @@ export default function ProductCardOrder({ order }) {
       </div>
       <div className="w-full flex justify-between items-center gap-5">
         <Input
-          onChange={(e) => setProductInfo(e.target.value)}
+          onChange={(e) => handleSendNote(e.target.value)}
           placeholder="Order Note..."
           value={productInfo}
           className="!w-[87%] !h-12 !text-start !bg-[#2D303E] !border !border-[#393C49] !rounded-[8px] text-white placeholder:!text-[#889898] !outline-hidden"

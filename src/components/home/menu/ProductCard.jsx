@@ -1,5 +1,3 @@
-import { Button, message } from "antd";
-import OrderProduct from "../../../assets/images/MenuImg.png";
 import ProductCardOrder from "./ProductCardOrder";
 import toast, { Toaster } from "react-hot-toast";
 import { useApi } from "../../../context/ApiContext";
@@ -9,9 +7,10 @@ export default function ProductCard({
   productsPayment,
   setProductsPayment,
   setbgBlack,
+  diningOption,
+  setDiningOption,
 }) {
   const { cart } = useApi();
-  const [selectedType, setSelectedType] = useState("Dine In");
 
   function openPayment() {
     if (cart?.items?.length > 0) {
@@ -46,10 +45,10 @@ export default function ProductCard({
               {["Dine In", "To Go", "Delivery"].map((type) => (
                 <button
                   key={type}
-                  onClick={() => setSelectedType(type)}
+                  onClick={() => setDiningOption(type)}
                   className={`rounded-lg cursor-pointer w-[66px] !p-[7px] text-[14px] font-[600] transition-all duration-300 active:scale-[80%] 
                     ${
-                      selectedType === type
+                      diningOption === type
                         ? "bg-[#EA7C69] text-white hover:bg-[#ea7c698e] "
                         : "bg-transparent border border-[#393c49]  text-[#EA7C69] hover:text-white hover:bg-[#ea7c698e]"
                     }`}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "../../../assets/icons";
 import { useApi } from "../../../context/ApiContext";
 import ProductCardOrder from "./ProductCardOrder";
@@ -15,8 +15,6 @@ export default function ProductCardPayment({ setProductsPayment, setbgBlack }) {
     setProductsPayment(false);
     setbgBlack(false);
   }, [cart?.items?.length == 0]);
-
-  console.log(cart);
 
   return (
     <div className="!w-[460px] h-screen flex flex-col justify-between items-center bg-[#1F1D2B] rounded-tl-lg rounded-bl-lg !p-8">

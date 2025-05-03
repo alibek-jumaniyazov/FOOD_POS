@@ -1,11 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   addCart,
+  addOrder,
   addProduct,
   deleteCart,
+  deleteOrder,
   deleteProduct,
   editProduct,
   fetchCart,
+  fetchOrders,
   fetchProducts,
   putCart,
 } from "../api/api.js";
@@ -18,6 +21,7 @@ export const ApiProvider = ({ children }) => {
   const [productsHot, setProductsHot] = useState([]);
   const [productsCold, setProductsCold] = useState([]);
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const getProducts = async () => {
     try {
@@ -112,9 +116,9 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
-  const updateCart = async (id, count) => {
+  const updateCart = async (id, count, note) => {
     try {
-      const res = await putCart(id, count);
+      const res = await putCart(id, count, note);
       getCart();
       return res.data;
     } catch (err) {
@@ -122,9 +126,54 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
+  const getOrders = async () => {
+    try {
+      const response = await fetchOrders();
+      setOrders(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching Orders:", error);
+    }
+  };
+
+  const postOrders = async (product) => {
+    try {
+      const response = await addOrder(product);
+      getOrders();
+      getCart();
+      getProducts();
+      getProductsHotDishes();
+      getProductsColdDishes();
+      return response.status;
+    } catch (error) {
+      console.error("Error updating Orders:", error);
+    }
+  };
+
+  const deletOrders = async (id) => {
+    try {
+      const response = await deleteOrder(id);
+      console.log(response);
+      getOrders();
+    } catch (error) {
+      console.error("Error delete Orders:", error);
+    }
+  };
+
+  const putOrder = async (id, status) => {
+    try {
+      const res = await putCart(id, status);
+      getOrders();
+      return res.data;
+    } catch (err) {
+      console.error("Orders update error:", err);
+    }
+  };
+
   useEffect(() => {
     getProducts();
     getCart();
+    getOrders();
     getProductsHotDishes();
     getProductsColdDishes();
   }, []);
@@ -134,6 +183,7 @@ export const ApiProvider = ({ children }) => {
     productsHot,
     productsCold,
     cart,
+    orders,
     getProductsHotDishes,
     getProductsColdDishes,
     getProducts,
@@ -144,6 +194,10 @@ export const ApiProvider = ({ children }) => {
     deletCart,
     postCrat,
     updateCart,
+    getOrders,
+    postOrders,
+    deletOrders,
+    putOrder,
   };
 
   return (
