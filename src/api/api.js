@@ -23,3 +23,6 @@ export const addOrder = (product) => API.post("/orders", product);
 export const deleteOrder = (id) => API.delete(`/orders/${id}`);
 export const putOrder = (id, status) =>
   API.put(`/orders/${id}/status`, { status });
+
+export const fetchMostOrders = () => API.get("/orders/most");
+export const fetchStatisticsOrders = () => API.get("/orders/statistics");

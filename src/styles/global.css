@@ -18,6 +18,31 @@ body {
   border-radius: 8px !important;
 }
 
+* {
+  --sb-track-color: #252836;
+  --sb-thumb-color: #989898;
+  --sb-size: 2px;
+}
+
+*::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
 :where(.css-dev-only-do-not-override-1261szd)[class^="ant-select"]
   [class^="ant-select"],
 :where(.css-dev-only-do-not-override-1261szd)[class*=" ant-select"]

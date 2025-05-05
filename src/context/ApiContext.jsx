@@ -8,11 +8,12 @@ import {
   deleteProduct,
   editProduct,
   fetchCart,
+  fetchMostOrders,
   fetchOrders,
   fetchProducts,
+  fetchStatisticsOrders,
   putCart,
 } from "../api/api.js";
-import dayjs from "dayjs";
 
 const ApiContext = createContext();
 
@@ -22,6 +23,8 @@ export const ApiProvider = ({ children }) => {
   const [productsCold, setProductsCold] = useState([]);
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [mostOrders, setMostOrders] = useState([]);
+  const [statisticsOrders, setStatisticsOrders] = useState({});
 
   const getProducts = async () => {
     try {
@@ -142,8 +145,10 @@ export const ApiProvider = ({ children }) => {
       getOrders();
       getCart();
       getProducts();
+      getMostOrders();
       getProductsHotDishes();
       getProductsColdDishes();
+      getStatisticsOrders();
       return response.status;
     } catch (error) {
       console.error("Error updating Orders:", error);
@@ -170,10 +175,32 @@ export const ApiProvider = ({ children }) => {
     }
   };
 
+  const getMostOrders = async () => {
+    try {
+      const response = await fetchMostOrders();
+      setMostOrders(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching Most:", error);
+    }
+  };
+
+  const getStatisticsOrders = async () => {
+    try {
+      const response = await fetchStatisticsOrders();
+      setStatisticsOrders(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error Statistics Orders:", error);
+    }
+  };
+
   useEffect(() => {
     getProducts();
     getCart();
     getOrders();
+    getMostOrders();
+    getStatisticsOrders();
     getProductsHotDishes();
     getProductsColdDishes();
   }, []);
@@ -184,6 +211,8 @@ export const ApiProvider = ({ children }) => {
     productsCold,
     cart,
     orders,
+    mostOrders,
+    statisticsOrders,
     getProductsHotDishes,
     getProductsColdDishes,
     getProducts,

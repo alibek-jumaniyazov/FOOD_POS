@@ -18,11 +18,11 @@ export default function OrderReports() {
           <span>Customer</span>
           <span>Menu</span>
           <span>Total Payment</span>
-          <span>Status</span>
+          <span className="!mr-3 -translate-x-[26px]">Status</span>
         </div>
       </div>
       <div className="w-full h-[1px] bg-[#393C49]"></div>
-      <div className="w-full flex flex-col justify-center items-start !p-6 gap-6">
+      <div className="w-full h-[460px] flex flex-col justify-start items-start !p-6 gap-6 overflow-y-auto ">
         {orders.map((order) => (
           <UserOrder order={order} key={order.id} />
         ))}

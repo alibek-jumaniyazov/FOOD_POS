@@ -1,8 +1,8 @@
 import React from "react";
 import Statistic from "../../components/dashboard/Statistic";
 import OrderReports from "../../components/dashboard/OrderReports";
-import MostOrder from "../../components/dashboard/MostOrder";
 import MostType from "../../components/dashboard/MostType";
+import MostOrders from "../../components/dashboard/MostOrders";
 export default function Dashboard() {
   return (
     <div className="Dashboard flex justify-between items-start gap-6 !p-6 w-full h-screen">
@@ -19,7 +19,7 @@ export default function Dashboard() {
         <OrderReports />
       </div>
       <div className="flex flex-col gap-6 w-[40%] h-full">
-        <MostOrder />
+        <MostOrders />
         <MostType />
       </div>
     </div>
