@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useApi } from "../../context/ApiContext";
 import { Image, Upload } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -27,34 +28,33 @@ export default function ProductPostModal({
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
-  console.log(fileList);
 
-  const handlePreview = (file) =>
-    __awaiter(void 0, void 0, void 0, function* () {
-      if (!file.url && !file.preview) {
-        file.preview = yield getBase64(file.originFileObj);
-      }
-      setPreviewImage(file.url || file.preview);
-      setPreviewOpen(true);
-    });
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
+  };
 
   const handleChangeImage = ({ fileList: newFileList }) =>
     setFileList(newFileList);
+
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
       <PlusOutlined />
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
+
   const handleCustomUpload = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", file.name);
     formData.append("publicKey", "public_ZN8X+QWk2chUWA9fec9MXU5DRKc="); // <-- public key is still required for the upload API
-  
-    // Add the private key to the Authorization header (ensure it's stored securely)
+
     const privateKey = "private_jLFlOPVpNsBCnNvT6SVDVZvTdZ8="; // <-- Replace with your private key from ImageKit
-  
+
     try {
       const res = await fetch(
         "https://upload.imagekit.io/api/v1/files/upload",
@@ -67,7 +67,7 @@ export default function ProductPostModal({
         }
       );
       const data = await res.json();
-  
+
       if (res.ok) {
         setForm((prev) => ({ ...prev, image: data.url }));
         onSuccess(data);
@@ -78,7 +78,6 @@ export default function ProductPostModal({
       onError(err);
     }
   };
-  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -86,13 +85,14 @@ export default function ProductPostModal({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form Data Before Submission:", form);
+
     const { category, ...productData } = form;
     postProduct(category, { ...productData, category });
-    console.log(category);
+    console.log(category, { ...productData, category });
 
     setIsOpen(false);
   };
-  console.log("Yuklangan rasm URL:", form.image);
 
   return (
     <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
@@ -129,9 +129,9 @@ export default function ProductPostModal({
             <label className="text-[14px] font-[500] text-white">
               File Upload
             </label>
-            <div className="!w-full flex  justify-center items-center">
+            <div className="!w-full flex justify-center items-center">
               <Upload
-                customRequest={handleCustomUpload} // bu yer o'zgartirildi
+                customRequest={handleCustomUpload}
                 listType="picture-card"
                 style={{ width: "100%" }}
                 className="!w-full"

@@ -27,30 +27,68 @@ export default function ProductEditModal({
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const { id, ...updatedData } = form;
-    putProduct(initialData.category, id, updatedData);
-    console.log(updatedData);
-    setIsEditOpen(false);
-  };
-
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
-  console.log(fileList);
+  
+  useEffect(() => {
+    setForm({ ...initialData });
+    // Initialize fileList with current image URL
+    if (initialData.image) {
+      setFileList([
+        {
+          uid: '-1',
+          name: 'image.jpg',
+          status: 'done',
+          url: initialData.image,
+        },
+      ]);
+    }
+  }, [initialData]);
 
-  const handlePreview = (file) =>
-    __awaiter(void 0, void 0, void 0, function* () {
-      if (!file.url && !file.preview) {
-        file.preview = yield getBase64(file.originFileObj);
+  const handleCustomUpload = async ({ file, onSuccess, onError }) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    formData.append("publicKey", "public_ZN8X+QWk2chUWA9fec9MXU5DRKc="); // <-- public key is still required for the upload API
+
+    const privateKey = "private_jLFlOPVpNsBCnNvT6SVDVZvTdZ8="; // <-- Replace with your private key from ImageKit
+
+    try {
+      const res = await fetch(
+        "https://upload.imagekit.io/api/v1/files/upload",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Basic ${btoa(privateKey + ":")}`, // Basic auth with your private key
+          },
+        }
+      );
+      const data = await res.json();
+
+      if (res.ok) {
+        setForm((prev) => ({ ...prev, image: data.url }));
+        onSuccess(data);
+      } else {
+        onError(data);
       }
-      setPreviewImage(file.url || file.preview);
-      setPreviewOpen(true);
-    });
+    } catch (err) {
+      onError(err);
+    }
+  };
+  
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
+  };
 
   const handleChangeImage = ({ fileList: newFileList }) =>
     setFileList(newFileList);
+
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
       <PlusOutlined />
@@ -62,6 +100,14 @@ export default function ProductEditModal({
     setIsEditOpen(false);
     setForm({ ...initialData });
   }
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const { id, ...updatedData } = form;
+    putProduct(initialData.category, id, updatedData);
+    console.log(updatedData);
+    setIsEditOpen(false);
+  };
 
   if (!isOpen) return null;
 
@@ -103,7 +149,7 @@ export default function ProductEditModal({
             </label>
             <div className="!w-full flex  justify-center items-center">
               <Upload
-                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                customRequest={handleCustomUpload}
                 listType="picture-card"
                 style={{ width: "100%" }}
                 className="!w-full"

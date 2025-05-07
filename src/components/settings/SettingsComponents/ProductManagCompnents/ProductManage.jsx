@@ -11,7 +11,7 @@ export default function ProductManage({ orders }) {
   return (
     <div className="relative flex flex-col justify-center items-center !w-[200px] !h-[290px] bg-[#1F1D2B] border border-[#393C49] rounded-lg transition duration-300 ease-in-out">
       <div className="flex flex-col justify-center items-center gap-4 !p-6 ">
-        <img src={MenuImg} alt="" className="w-[127px] h-[127px]" />
+        <img src={orders.image} alt="" className="w-[127px] h-[127px]" />
         <h4 className="w-[144px] text-center text-[14px] font-[500] text-white">
           {orders.title}
         </h4>

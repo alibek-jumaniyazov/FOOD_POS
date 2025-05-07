@@ -9,8 +9,13 @@ export const deleteProduct = (category, id) =>
   API.delete(`/products/${category}/${id}`);
 export const editProduct = (category, id, updatedProduct) =>
   API.put(`/products/${category}/${id}`, updatedProduct);
+
 export const addProduct = (category, product) =>
-  API.post(`/products/${category}`, product);
+  API.post(`/products/${category}`, product, {
+    headers: {
+      "Content-Type": "application/json", // Setting headers here directly
+    },
+  });
 
 export const fetchCart = () => API.get("/cart");
 export const addCart = (product) => API.post("/cart", product);

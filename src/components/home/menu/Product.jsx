@@ -2,6 +2,7 @@ import { useApi } from "../../../context/ApiContext";
 
 export default function xProduct({ order }) {
   const { postCrat } = useApi();
+console.log(order);
 
   return (
     <div
@@ -11,7 +12,7 @@ export default function xProduct({ order }) {
     >
       <img
         src={order.image}
-        alt=""
+        alt={order.image}
         className="w-[132px] h-[132px] !mt-[-100px]"
       />
       <h4 className="text-center text-[14px] font-[500] text-white">
