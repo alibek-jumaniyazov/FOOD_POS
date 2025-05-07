@@ -46,6 +46,39 @@ export default function ProductPostModal({
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
+  const handleCustomUpload = async ({ file, onSuccess, onError }) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    formData.append("publicKey", "public_ZN8X+QWk2chUWA9fec9MXU5DRKc="); // <-- public key is still required for the upload API
+  
+    // Add the private key to the Authorization header (ensure it's stored securely)
+    const privateKey = "private_jLFlOPVpNsBCnNvT6SVDVZvTdZ8="; // <-- Replace with your private key from ImageKit
+  
+    try {
+      const res = await fetch(
+        "https://upload.imagekit.io/api/v1/files/upload",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Basic ${btoa(privateKey + ":")}`, // Basic auth with your private key
+          },
+        }
+      );
+      const data = await res.json();
+  
+      if (res.ok) {
+        setForm((prev) => ({ ...prev, image: data.url }));
+        onSuccess(data);
+      } else {
+        onError(data);
+      }
+    } catch (err) {
+      onError(err);
+    }
+  };
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -59,6 +92,7 @@ export default function ProductPostModal({
 
     setIsOpen(false);
   };
+  console.log("Yuklangan rasm URL:", form.image);
 
   return (
     <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
@@ -97,7 +131,7 @@ export default function ProductPostModal({
             </label>
             <div className="!w-full flex  justify-center items-center">
               <Upload
-                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                customRequest={handleCustomUpload} // bu yer o'zgartirildi
                 listType="picture-card"
                 style={{ width: "100%" }}
                 className="!w-full"
@@ -107,6 +141,7 @@ export default function ProductPostModal({
               >
                 {fileList.length >= 1 ? null : uploadButton}
               </Upload>
+
               {previewImage && (
                 <Image
                   wrapperStyle={{ display: "none" }}
