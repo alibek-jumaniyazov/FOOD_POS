@@ -2,7 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { sidebarItems } from "../../constants/sidebar/sidebarItems";
 import pettern from "../../assets/images/Pattern.png";
 import React, { useEffect, useState } from "react";
-import { Icons } from "../../assets/icons";
+import { Icons } from "../../assets/index";
 
 const Sidebar = () => {
   const location = useLocation();

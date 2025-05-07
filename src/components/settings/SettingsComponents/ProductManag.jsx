@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
 import { categoryMenu } from "../../../constants/home/category";
 import { ProductsManagRoute } from "../../../routes/ProductsManagRoutes";
-import { Icons } from "../../../assets/icons";
+import { Icons } from "../../../assets";
 
 export default function ProductManag() {
   return (

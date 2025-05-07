@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Icons } from "../../../../assets/icons";
 import MenuImg from "../../../../assets/images/MenuImg.png";
 import { useApi } from "../../../../context/ApiContext";
 import ProductEditModal from "../../../productsManag/ProductEditModal";
+import { Icons } from "../../../../assets";
 
 export default function ProductManage({ orders }) {
   const { removeProduct } = useApi();

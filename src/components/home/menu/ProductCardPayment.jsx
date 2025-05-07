@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Icons } from "../../../assets/icons";
 import { useApi } from "../../../context/ApiContext";
 import ProductCardOrder from "./ProductCardOrder";
+import { Icons } from "../../../assets";
 
 export default function ProductCardPayment({ setProductsPayment, setbgBlack }) {
   const { cart } = useApi();

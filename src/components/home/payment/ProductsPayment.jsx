@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Icons } from "../../../assets/icons";
 import { Select } from "antd";
 import { useApi } from "../../../context/ApiContext";
+import { Icons } from "../../../assets";
 
 export default function ProductsPayment({
   setProductsPayment,

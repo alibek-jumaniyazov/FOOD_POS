@@ -1,7 +1,7 @@
 import { Input } from "antd";
 import React, { useEffect, useState } from "react";
-import { Icons } from "../../../assets/icons";
 import { useApi } from "../../../context/ApiContext";
+import { Icons } from "../../../assets";
 
 export default function ProductCardOrder({ order }) {
   const { deletCart, updateCart } = useApi();

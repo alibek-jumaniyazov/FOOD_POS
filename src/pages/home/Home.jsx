@@ -7,8 +7,8 @@ import Product from "../../components/home/menu/Product";
 import ProductCard from "../../components/home/menu/ProductCard";
 import ProductsPayment from "../../components/home/payment/ProductsPayment";
 import ProductCardPayment from "../../components/home/menu/ProductCardPayment";
-import { Icons } from "../../assets/icons";
 import { useApi } from "../../context/ApiContext";
+import { Icons } from "../../assets";
 
 export default function Home() {
   const { products, cart, postOrders } = useApi();

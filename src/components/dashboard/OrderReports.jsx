@@ -1,4 +1,4 @@
-import { Icons } from "../../assets/icons";
+import { Icons } from "../../assets";
 import { useApi } from "../../context/ApiContext";
 import UserOrder from "./UserOrder";
 export default function OrderReports() {

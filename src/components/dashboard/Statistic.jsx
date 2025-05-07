@@ -1,6 +1,6 @@
 import React from "react";
-import { Icons } from "../../assets/icons";
 import { useApi } from "../../context/ApiContext";
+import { Icons } from "../../assets";
 export default function Statistic() {
   const { statisticsOrders } = useApi();
 
