@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
-import ColdDishesManage from "../pages/ProductsManag/ColdDishesManage";
-import HotDishesManage from "../pages/ProductsManag/HotDishesManage";
+import HotDishesManage from "../pages/productsManag/HotDishesManage";
+import ColdDishesManage from '../pages/productsManag/ColdDishesManage'
 
 export const ProductsManagRoute = [
   {
