@@ -30,10 +30,10 @@ export const Icons = {
 
   orders: (props) => (
     <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="currentColor"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
@@ -167,9 +167,9 @@ export const Icons = {
   ),
   Logout: (props) => (
     <svg
-      width="20"
-      height="20"
-      viewBox="0 0 21 21"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
